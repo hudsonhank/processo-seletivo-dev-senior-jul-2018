@@ -1,0 +1,29 @@
+<div *ngIf="formularioArray.ControlType && formularioArray.ControlType.Tipo==1">
+      
+  <div class="box-header with-border">
+    <h3 class="box-title">{{formularioArray.Label}}</h3>
+  </div> 
+  <div [formGroup]="formularioArray.Formulario" class="form-group box-body">
+    <div class="row">
+        <form-input [formularioControle]="this.formularioArray.ControlType" [formularioPrincipal]="formularioPrincipal" ></form-input>
+    </div>
+    <div class="col-md-12 text-center">          
+          <button type="button" mat-raised-button (click)="onAdicionar()">Adicionar</button>
+    </div>
+  </div>        
+</div>
+
+<div *ngIf="formularioArray.ControlType && formularioArray.ControlType.Tipo==2">		
+
+  <div class="example-full-width box-header with-border">
+    <h3 class="box-title">{{formularioArray.ControlType.Label}} </h3>
+    <button type="button" mat-raised-button (click)="onAddLista()" color="accent">Novo item</button>
+	</div>                               
+      
+	<div>
+		<form-grid #formGridArrayId [formularioPrincipal]="formularioPrincipal" [formularioArray]="formularioArray"></form-grid>
+  </div>
+  
+</div>
+
+

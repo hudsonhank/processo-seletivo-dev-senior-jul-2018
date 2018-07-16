@@ -1,0 +1,67 @@
+	<!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu" data-widget="tree">            
+           
+           <li *ngFor="let menu of menus" class="treeview active menu-open">
+            <a href="#">
+              <i [class]="menu.Classe"></i><span>{{menu.Nome}}</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li *ngFor="let submenu of menu.SubMenu">
+                <a [routerLink]="[submenu.Uri]"><i [class]="submenu.Classe"></i>{{submenu.Nome}}</a>
+              </li>
+            </ul>
+          </li>     
+
+          <!--li class="treeview active menu-open" >
+            <a href="#">
+              <i class="fa fa-edit"></i><span>Pessoa</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                  <li><a [routerLink]="['/modulo-pessoa/formulario']"><i class="fa fa-files-o"></i>Formulário</a></li>
+                  <li><a [routerLink]="['/modulo-pessoa/pessoa-listar']"><i class="fa fa-th"></i>Listar</a></li>
+            </ul>
+          </li>     
+
+          <li class="treeview active menu-open">
+            <a href="#">
+              <i class="fa fa-gears"></i><span>Projetos</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a [routerLink]="['/modulo-projeto/formulario']"><i class="fa fa-cc"></i>Formulário</a></li>
+                <li><a [routerLink]="['/modulo-projeto/projeto-listar']"><i class="fa fa-th"></i>Listar</a></li>
+            </ul>
+          </li>     
+
+
+          <li class="treeview active menu-open">
+            <a href="#">
+              <i class="fa fa-gears"></i><span>Projetos 2</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a [routerLink]="['/modulo-projeto/formulario']"><i class="fa fa-cc"></i>Formulário</a></li>
+                <li><a [routerLink]="['/modulo-projeto/projeto-listar']"><i class="fa fa-th"></i>Listar 1</a></li>
+                <li><a [routerLink]="['/modulo-projeto/projeto-listar']"><i class="fa fa-th"></i>Listar 2</a></li>
+            </ul>
+          </li-->     
+
+        </ul>
+
+        </section>
+
+      </aside>

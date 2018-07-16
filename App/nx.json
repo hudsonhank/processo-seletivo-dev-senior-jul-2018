@@ -1,0 +1,36 @@
+{
+  "npmScope": "myorg",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "sistema": {
+      "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "form-dinamico": {
+      "tags": []
+    },
+    "pessoas-state": {
+      "tags": []
+    },
+    "shared": {
+      "tags": []
+    },
+    "pessoas": {
+      "tags": []
+    },
+    "livros": {
+      "tags": []
+    },
+    "livros-state": {
+      "tags": []
+    }
+  }
+}

@@ -1,0 +1,57 @@
+<div class="example-container mat-elevation-z8">                   
+	<mat-table [dataSource]="dataSource" matSort>		
+
+ <!-- Checkbox Column -->
+ <ng-container matColumnDef="editar">
+		<mat-header-cell *matHeaderCellDef  [ngClass]="'customWidthClass'">
+		  Editar
+		</mat-header-cell>		
+		<mat-cell *matCellDef="let row"  [ngClass]="'customWidthClass'">
+			<!--button type="button" (click)="editar(row)" class="btn btn-success btn-sm"><span class="glyphicon ion-edit"></span></button-->		
+
+			<button mat-icon-button color="primary" type="button" (click)="editarItem(row)" class="material-icons mat-36">
+			<mat-icon aria-label="Example icon-button with a heart icon">mode_edit</mat-icon>
+			<!--i class="material-icons">mode_edit</i-->
+			</button>
+
+		</mat-cell>	
+</ng-container>
+
+	 <ng-container matColumnDef="excluir">
+		<mat-header-cell *matHeaderCellDef [ngClass]="'customWidthClass'">
+		  Excluir
+		</mat-header-cell>		
+		
+		<mat-cell *matCellDef="let row" [ngClass]="'customWidthClass'">
+			<!--button type="button" (click)="excluir(row)" class="btn btn-danger btn-sm"><span class="glyphicon ion-trash-a"></span></button-->
+
+			<button mat-icon-button color="warn" type="button" (click)="excluirItem(row)" class="material-icons mat-36">
+					<mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon>
+				</button>
+
+		</mat-cell>	
+	 </ng-container>
+	 
+
+	<mat-header-row [ngClass]="'mat-header'" *matHeaderRowDef="displayedColumns"></mat-header-row>
+	<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+		
+
+	
+
+	<!-- Generic column definition -->
+	<ng-container *ngFor="let coluna of colunas; let i = index" [matColumnDef]="coluna.Key">
+		<mat-header-cell [class.widthIdClass]="coluna.Key=='Id'" *matHeaderCellDef mat-sort-header>{{ coluna.Label }}</mat-header-cell>
+		<mat-cell  [class.widthIdClass]="coluna.Key=='Id'" *matCellDef="let row">{{ coluna.Valor(row, coluna.Key)}}</mat-cell>				
+	</ng-container>
+
+			<!-- Generic column definition -->
+			<!--ng-container *ngFor="let coluna of Object.keys(colunas); let i = index" [matColumnDef]="coluna">
+					<mat-header-cell *matHeaderCellDef mat-sort-header>{{ this.colunas[coluna].Label }}</mat-header-cell>
+					<mat-cell *matCellDef="let row">{{ this.colunas[coluna].Valor(row, i)}}</mat-cell>
+				</ng-container-->
+				
+		
+	</mat-table>						
+	<mat-paginator [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+</div>

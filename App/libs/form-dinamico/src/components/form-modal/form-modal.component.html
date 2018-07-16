@@ -1,0 +1,18 @@
+
+<h3 mat-dialog-title class="col-md-12 text-center">{{titulo}}</h3>
+<mat-dialog-content>
+    <section class="content">
+        <form [formGroup]="controle.Formulario">
+            <form-dinamico [formularioPrincipal]="controle"></form-dinamico>
+        </form>
+    </section>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="col-md-12 text-center">        
+        <!--button type="button" (click)="onCloseConfirm()" [class.btn-primary]="acao" [class.btn-success]="!acao" class="btn">{{textoAcao}}</button>              
+        <button type="button" mat-dialog-close class="btn btn-danger">Fechar</button-->        
+        <button  (click)="onCloseConfirm()" mat-raised-button color="primary">{{textoAcao}}</button>                    
+        <button mat-dialog-close mat-raised-button color="warn">Fechar</button>
+
+    </div>
+</mat-dialog-actions>

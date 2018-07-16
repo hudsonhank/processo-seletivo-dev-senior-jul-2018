@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  sql.data:
+    image: microsoft/mssql-server-linux:2017-latest
+
+  redis.cache:
+    image: redislabs/redisearch:latest
+  
+  sgl.api:
+    image: ${DOCKER_REGISTRY}sglapi
+    build:
+      context: .
+      dockerfile: src/Servives/SGL/SGL.API/Dockerfile
+    depends_on:
+      - sql.data
+      - redis.cache

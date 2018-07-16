@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  sql.data:
+    environment:
+      - SA_PASSWORD=banco@123
+      - ACCEPT_EULA=Y
+    volumes:      
+      - ./data/sql-server:/var/opt/mssql
+    ports:
+      - "2433:1433"    # Important: In a production environment your should remove the external port
+  
+  redis.cache:
+    ports:
+      - "32779:6379"  # Important: In a production environment your should remove the external port
+    volumes:
+      - ./data/redis:/data
+      
+  sgl.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80      
+      - Connection:Relacional= Server=sql.data;Initial Catalog=DBSGL;Integrated Security=False;User ID=sa;Password=banco@123;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+      - Connection:Cache=redis.cache
+    ports:
+      - "50000:80"      
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

@@ -1,0 +1,38 @@
+<section class="content-header"><h1>{{titulo}}</h1></section>
+<section class="content">
+    <form novalidate [formGroup]="principal.Formulario" (ngSubmit)="onSubmit()">
+        
+        <form-dinamico [formularioPrincipal]="principal"></form-dinamico>         
+        <div class="row">
+            <div class="col-md-12">
+                <label>Anexo da imagem da capa do livro</label>
+                <div class="input-group">
+                    <div class="form-control" data-trigger="fileinput">
+                        <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                        <span class="fileinput-filename">{{NomeDoArquivo}}</span>
+                    </div>
+
+                    <span *ngIf="!this.arquivoService.isEnviado" class="input-group-addon btn btn-default btn-file">                                        
+                        <input (change)="this.arquivoService.onFileSelected($event)" type="file" accept=".jpg, .jpeg, .png" class="form-control" name="fileinput" ng2FileSelect [uploader]="this.arquivoService.uploader" />
+                        <span class="fileinput-new">Selecionar</span>
+                    </span>
+                    <span *ngIf="this.arquivoService.isEnviado" class="input-group-btn">                            
+                        <button type="button" (click)="arquivoService.onLimparQueue()" mat-raised-button color="warn">Remover</button>
+                    </span>
+                </div>
+                <small *ngIf="this.arquivoService.isEnviado">
+                    <div class="form-group has-success">
+                        <label>Arquivo enviado com sucesso!</label>
+                    </div>
+                </small>
+            </div>
+        </div>
+        <div class="row text-center" style="padding-top: 15px">
+            <div class="col-md-12 text-center">
+                <button type="submit" mat-raised-button color="primary">Salvar</button>&nbsp;
+                <button type="button" mat-raised-button [routerLink]="['/modulo-livro/livro-listar']" color="warn">Cancelar</button>&nbsp;
+                <button type="button" mat-raised-button [routerLink]="['/modulo-livro/formulario']" *ngIf="this.livroId > 0">Novo</button>
+            </div>
+        </div>
+    </form>
+</section>

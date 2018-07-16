@@ -1,0 +1,148 @@
+<div *ngIf="formularioControle.ControleTipo=='hidden'" [formGroup]="this.formularioPrincipal.Formulario">
+	<input [formControlName]="formularioControle.Key" [id]="formularioControle.Key" type="hidden"> 
+</div>
+<div *ngIf="formularioControle.ControleTipo!='hidden' && formularioControle.Visivel" [formGroup]="this.formularioPrincipal.Formulario">	
+<div [class.has-error]="isInValid">                                 
+	<label [class.has-error]="isInValid" *ngIf="formularioControle.ControleTipo == 'radiobutton' ||  formularioControle.ControleTipo == 'checkbox'">{{formularioControle.Label}}</label>
+	<small *ngIf="isInValid  && (formularioControle.ControleTipo=='radiobutton' || formularioControle.ControleTipo=='checkbox')" class="form-group has-error"><label>{{ erro }}</label></small>
+	<div [ngSwitch]="formularioControle.ControleTipo">         
+		<div *ngSwitchCase="'textbox'">
+			<div *ngIf="formularioControle.TypeData">            
+				<div [ngSwitch]="formularioControle.TypeData">
+
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'text'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputText (keypress)="onKeyPress($event,'text')" [readonly]="formularioControle.Editavel" [placeholder]="formularioControle.PlaceHolder" [formControlName]="formularioControle.Key" [required]="formularioControle.Editavel">
+						<mat-hint *ngIf="inputText.value==''">{{ formularioControle.Label }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+					
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'objeto'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputObjeto (keypress)="onKeyPress($event,'objeto')" [readonly]="formularioControle.Editavel" [value]="formularioControle.Valor" [placeholder]="formularioControle.PlaceHolder" [formControlName]="formularioControle.Key" [required]="formularioControle.Editavel">
+						<mat-hint *ngIf="inputObjeto.value==''">{{ formularioControle.Label }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+
+					<!--mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'objeto'">
+							<input matInput 
+							#inputObjeto
+							(keypress)="onKeyPress($event,'objeto')"
+							[maxlength]="formularioControle.Maximo" 
+							[readonly]="!formularioControle.Editavel"
+							[value]="formularioControle.Valor" 
+							[type]="formularioControle.Type"
+							[formControlName]="formularioControle.Key">
+							<mat-hint *ngIf="inputObjeto.value==''">{{ formularioControle.PlaceHolder }}</mat-hint>
+							<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field-->
+
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'number'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputNumber (keypress)="onKeyPress($event,'number')" [maxlength]="formularioControle.Maximo" [value]="formularioControle.Valor" [placeholder]="formularioControle.PlaceHolder" [formControlName]="formularioControle.Key">
+						<mat-hint *ngIf="inputNumber.value==''">{{ formularioControle.Label }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+
+					<!--mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'number'">
+							<input matInput 
+							#inputNumber
+							(keypress)="onKeyPress($event,'number')"
+							[maxlength]="formularioControle.Maximo" 
+							[readonly]="!formularioControle.Editavel"
+							[value]="formularioControle.Valor" 
+							[type]="formularioControle.Type"
+							[formControlName]="formularioControle.Key">
+							<mat-hint *ngIf="inputNumber.value==''">{{ formularioControle.PlaceHolder }}</mat-hint>
+							<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field-->
+						
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'Date'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputDate [textMask]="{mask: dataMask, showMask:false, guide:true, keepCharPositions:true}" type="datetime"  [value]="formularioControle.Valor" [placeholder]="formularioControle.PlaceHolder" [formControlName]="formularioControle.Key">
+						<mat-hint *ngIf="inputDate.value==''">{{ formularioControle.Label }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'cpf'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputCpf (blur)="onBlur()" [textMask]="{mask: cpfMask, showMask:false, guide:false, keepCharPositions:true}" 
+						[readonly]="formularioControle.Editavel" [value]="formularioControle.Valor" [placeholder]="formularioControle.PlaceHolder"
+						[formControlName]="formularioControle.Key">
+						<mat-hint *ngIf="inputCpf.value==''">{{ formularioControle.Label }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'cnpj'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputCnpj (blur)="onBlur()" [textMask]="{mask: cnpjMask, showMask:false, guide:false, keepCharPositions:true}"
+						[readonly]="formularioControle.Editavel"  [value]="formularioControle.Valor" [placeholder]="formularioControle.PlaceHolder"
+						[formControlName]="formularioControle.Key">
+						<mat-hint *ngIf="inputCnpj.value==''">{{ formularioControle.PlaceHolder }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'fone'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputFone (blur)="onBlur()"  [textMask]="{mask: foneMask, showMask:false, guide:false, keepCharPositions:true}"
+						[readonly]="formularioControle.Editavel"  [value]="formularioControle.Valor" [placeholder]="formularioControle.PlaceHolder"
+						[formControlName]="formularioControle.Key" [required]="formularioControle.Editavel">
+						<mat-hint *ngIf="inputFone.value==''">{{ formularioControle.PlaceHolder }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'email'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputEmail (keypress)="onKeyPress($event,'email')" type="email" [readonly]="formularioControle.Editavel" [value]="formularioControle.Valor" 
+						[placeholder]="formularioControle.PlaceHolder" [formControlName]="formularioControle.Key" [required]="formularioControle.Editavel">
+						<mat-hint *ngIf="inputEmail.value==''">{{ formularioControle.PlaceHolder }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+
+					<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'EmailAddress'">
+						<ng-template>{{formularioControle.Label}}</ng-template>
+						<input matInput #inputEmailAddress (keypress)="onKeyPress($event,'email')" type="email" [value]="formularioControle.Valor"
+						[placeholder]="formularioControle.PlaceHolder" [formControlName]="formularioControle.Key" [required]="formularioControle.Editavel">
+						<mat-hint *ngIf="inputEmailAddress.value==''">{{ formularioControle.PlaceHolder }}</mat-hint>
+						<mat-error *ngIf="erro" class="form-group has-error">{{ erro }}</mat-error>
+					</mat-form-field>
+			
+				</div>
+			</div>   
+		</div>
+
+	<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'textarea'">
+		<textarea matInput [maxlength]="formularioControle.Maximo" [formControlName]="formularioControle.Key" [placeholder]="formularioControle.PlaceHolder" class="form-control"
+				[id]="formularioControle.Key" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5">
+		</textarea>
+	</mat-form-field>
+		
+	<mat-form-field [class]="formularioControle.Class" *ngSwitchCase="'dropdown'">
+		<ng-template>{{formularioControle.Label}}</ng-template>
+		<mat-select [placeholder]="formularioControle.PlaceHolder" [value]="formularioControle.Valor" (selectionChange)="dropChange($event, formularioControle.Key )" 
+		[formControlName]="formularioControle.Key" 
+		[value]="formularioControle.Valor">
+			<mat-option *ngFor="let opt of formularioControle.ListaOpcoes" [value]="opt.Nome">
+					{{opt.Descricao}}
+			</mat-option>
+		</mat-select>
+		<mat-hint>{{ formularioControle.PlaceHolder }}</mat-hint>
+	</mat-form-field>
+					
+	<mat-radio-group *ngSwitchCase="'radiobutton'" [class]="formularioControle.Class" [value]="formularioControle.Valor" [formControlName]="formularioControle.Key">
+			<ng-template>{{formularioControle.Label}}</ng-template>
+			<mat-radio-button  style="padding-left: 10px" *ngFor="let opt of formularioControle.ListaOpcoes; let k = index;" [value]="opt.Valor" [checked]="opt.Checado">
+			<small>{{opt.Descricao}}</small>
+			</mat-radio-button>
+	</mat-radio-group>
+	
+
+	<div [class]="formularioControle.Class" *ngSwitchCase="'checkbox'" >
+		<section *ngFor="let opt of formularioControle.ListaOpcoes; let k = index;" [formArrayName]="formularioControle.Key">
+			<div>                                         
+				<mat-checkbox style="padding-left: 10px" [formControlName]="k" [value]="opt.Valor"><small>{{opt.Valor}}</small></mat-checkbox>
+			</div>  					                        
+		</section>                                               
+	</div> 
+	</div>
+</div>

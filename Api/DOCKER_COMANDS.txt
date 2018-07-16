@@ -1,0 +1,116 @@
+
+/*
+CQRS: (Command Query Responsibility Segregation): "segregação de responsabilidade por leitura e escrita"
+C: Command
+Q: Query
+R: Responsibility
+S: Segregation
+*/
+
+
+
+REDIS
+-------------------------
+
+	docker pull redislabs/redisearch:latest
+	docker run -it -v /data/redis:/data -d redislabs/redisearch:latest
+
+docker run -d -p 32779:6379 redislabs/redisearch:latest
+
+
+SQL-SERVER
+--------------------
+
+docker pull microsoft/mssql-server-linux:2017-latest
+
+
+
+./data/sql-server:/var/opt/mssql
+
+
+
+DOCKER-LOCAL
+-----------------
+
+docker pull microsoft/mssql-server-linux:2017-latest
+docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.1
+docker pull docker.elastic.co/kibana/kibana:6.3.1
+docker pull rabbitmq:latest
+docker pull redislabs/redisearch:latest
+
+
+
+
+
+
+
+-- RODANDO 
+docker run -p 5672:5672 -p 25672:25672 -v /data/rabbitmq:/var/lib/rabbitmq/mnesia --name sgl-rabbit -d rabbitmq:latest
+docker run -p 32779:6379 --name sgl-redis -v /data/redis:/data -d redislabs/redisearch:latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=banco@123" -p 5433:1433 -v /data/sql-server:/var/opt/mssql -d microsoft/mssql-server-linux:2017-latest
+docker run -p 9200:9200 -p 9300:9300 --name sgl-elastic -e "discovery.type=single-node" -v /data/elastic:/usr/share/elasticsearch/data -d docker.elastic.co/elasticsearch/elasticsearch:6.3.1
+docker run --name sgl-kibana --link sgl-elastic -p 5601:5601 -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -d docker.elastic.co/kibana/kibana:6.3.1
+
+
+--RODANDO
+docker run -p 9200:9200 -p 9300:9300 -v /data/elastic:/usr/share/elasticsearch/data --name sagf-elastic -d docker.elastic.co/elasticsearch/elasticsearch:6.3.1
+docker run --name sagf-kibana -p 5601:5601 -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -d docker.elastic.co/kibana/kibana:6.3.1
+docker run --name sagf-redis -v /data/redis:/data -p 32779:6379 -d redislabs/redisearch:latest
+docker run --name sagf-sqlserver -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=banco@123" -p 5433:1433 -v /data/sql-server:/var/opt/mssql -d microsoft/mssql-server-linux:2017-latest
+docker run --name sagf-rabbit -p 5672:5672 -p 25672:25672 -v /data/rabbitmq:/var/lib/rabbitmq/mnesia -d rabbitmq:latest
+
+
+--SQL-SERVER
+docker exec -it sagf-sqlserver "bash"
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'banco@123'
+
+
+CREATE DATABASE DBProjeto
+GO
+USE DBProjeto
+
+
+sqlcmd -S 10.3.2.4,1433 -U SA -P "banco@123"
+
+--EXEMPLOS
+
+docker ps -a
+
+
+
+----------------------------------------
+
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -v /data/elastic:/usr/share/elasticsearch/data docker.elastic.co/elasticsearch/elasticsearch:6.3.0
+docker run -p 5601:5601 --name sgl-kibana --link elastic-sgl -d docker.elastic.co/kibana/kibana:6.3.1
+docker run --name sgl-kibana -p 5601:5601 -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -d docker.elastic.co/kibana/kibana:6.3.1
+docker run --name sgl-kibana -e ELASTICSEARCH_URL=http://localhost:9200 -p 5601:5601 -d kibana
+docker run --name sgl-kibana -p 5601:5601 -d docker.elastic.co/kibana/kibana:6.3.1
+docker run --name sgl-kibana --link naughty_kilby -p 5601:5601 -d kibana
+docker run --name sgl-kibana -e ELASTICSEARCH_URL=http://172.17.0.2:9200 -p 5601:5601 -d kibana
+docker run -d -p 5672:5672 -p 25672:25672 -v /data/rabbitmq:/var/lib/rabbitmq/mnesia --name sgl-rabbit rabbitmq:latest
+docker run --name some-kibana -e ELASTICSEARCH_URL=http://localhost:9200 -p 5601:5601 -d kibana
+docker run --link some-elasticsearch:elasticsearch -d kibana
+docker run -d -p 5672:5672 -v /data/rabbitmq:/var/lib/rabbitmq --hostname sgl-rabbit --name some-rabbit rabbitmq:3
+docker run -d -p 5672:5672 rabbitmq:3-management-alpine
+docker run -it -v /data/redis:/data -d redislabs/redisearch:latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=banco@123" -p 5433:1433 -v /data/sql-server:/var/opt/mssql -d microsoft/mssql-server-linux:2017-latest
+docker run -d -p 32779:6379 redislabs/redisearch:latest
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.3.0
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=banco@123" -p 5433:1433 -v /data/sql-server:/var/opt/mssql -d microsoft/mssql-server-linux:2017-latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=banco@123" `
+   -p 1433:1433 --name sql_pessoa `
+   -v /data/containers/SQLServer01/mssql:/var/opt/mssql `
+   -d microsoft/mssql-server-linux:2017-latest
+
+
+
+
+
+
+docker run –name SQLServer01 -e "ACCEPT_EULA=Y" `
+-e "SA_PASSWORD=banco@123" `
+-p 5433:1433  -v /data/containers/SQLServer01/mssql:/var/opt/mssql `
+-d microsoft/mssql-server-linux:2017-latest
+
+

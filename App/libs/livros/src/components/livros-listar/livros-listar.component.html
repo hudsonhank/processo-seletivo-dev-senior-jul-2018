@@ -1,0 +1,38 @@
+<section class="content-header">
+        <form (ngSubmit)="onListar()" novalidate>
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="row">
+                    <h2 class="col-md-12">Listar Livros</h2>
+                </div>
+                <div class="row" style="padding-top: 25px">                    
+                    <div class="col-md-4">
+                        <form-input [formularioControle]="filtros.Controles['Titulo']" [formularioPrincipal]="filtros"></form-input>                
+                    </div>
+                    <div class="col-md-4">                
+                         <form-input [formularioControle]="filtros.Controles['Autor']" [formularioPrincipal]="filtros"></form-input>                    
+                    </div>
+                    <div class="col-md-4">                
+                        <form-input [formularioControle]="filtros.Controles['Genero']" [formularioPrincipal]="filtros"></form-input>                    
+                    </div>
+                    <div class="col-md-4">                
+                        <form-input [formularioControle]="filtros.Controles['Editora']" [formularioPrincipal]="filtros"></form-input>                    
+                    </div>
+                    <div class="col-md-4">                
+                        <form-input [formularioControle]="filtros.Controles['PublicacaoAno']" [formularioPrincipal]="filtros"></form-input>                    
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom: 25px">
+                    <div class="col-md-12 text-center">                    
+                        <button type="submit" mat-raised-button color="primary">Buscar</button>&nbsp;                                        
+                        <button type="button" mat-raised-button [routerLink]="['/modulo-livro/formulario']" color="accent">Cadastrar</button>
+                    </div>
+                </div>
+                <br>
+               <div *ngIf="valores.Valores.value">
+						<form-grid #formGridId (excluir)="onExcluir($event)" [formularioArray]="valores" [acoes]="acoes" ></form-grid>
+               </div>
+            </div>            
+        </div>        
+        </form>
+    </section>

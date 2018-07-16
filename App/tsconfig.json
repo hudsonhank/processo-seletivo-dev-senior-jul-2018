@@ -1,0 +1,52 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@myorg/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@myorg/shared": [
+        "libs/shared/src/index.ts"
+      ],
+      "@myorg/pessoas-components": [
+        "libs/pessoas-components/src/index.ts"
+      ],
+      "@myorg/projetos-modulo": [
+        "libs/projetos-modulo/src/index.ts"
+      ],
+      "@myorg/pessoas-state": [
+        "libs/pessoas-state/src/index.ts"
+      ],
+      "@myorg/pessoas": [
+        "libs/pessoas/src/index.ts"
+      ],
+      "@myorg/form-dinamico": [
+        "libs/form-dinamico/src/index.ts"
+      ],
+      "@myorg/livros": [
+        "libs/livros/src/index.ts"
+      ],
+      "@myorg/livros-state": [
+        "libs/livros-state/src/index.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}

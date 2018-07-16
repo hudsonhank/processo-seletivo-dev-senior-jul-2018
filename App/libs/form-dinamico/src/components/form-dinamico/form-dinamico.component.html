@@ -1,0 +1,22 @@
+
+<div [formGroup]="formularioPrincipal.Formulario" [class]="formularioPrincipal.Class">      
+    <div class="box-header with-border" *ngIf="formularioPrincipal.Label !=''" >
+       <h3 class="box-title">{{formularioPrincipal.Label}}</h3>
+    </div>   
+    <div class="row box-body">      
+       <div *ngFor="let controle of controles" [class.example-full-width]="controle.Tipo==3" [class]="controle.Class"> 
+          <div [ngSwitch]="controle.Tipo">
+                <div *ngSwitchCase="1">
+                    <form-input [formularioControle]="controle" [formularioPrincipal]="formularioPrincipal"></form-input>
+                </div>
+                <div *ngSwitchCase="2" [formGroupName]="controle.Key">
+                    <form-dinamico [formularioPrincipal]="controle"></form-dinamico>            
+                </div>    
+                <div *ngSwitchCase="3" [formGroupName]="controle.Key">                        
+                    <form-array [formularioPrincipal]="formularioPrincipal" [formularioArray]="controle"></form-array>
+                </div>			
+          </div>            
+       </div>      
+    </div>
+ </div>
+ 

@@ -1,0 +1,48 @@
+<mat-sidenav-container class="docs-component-viewer-sidenav-container mat-drawer-container mat-sidenav-container">
+      <div class="mat-drawer-backdrop"></div>
+
+      <mat-sidenav-content cdkscrollable="" class="mat-drawer-content mat-sidenav-content ng-star-inserted">  
+         <div class="docs-component-sidenav-content">      
+            <div  class="docs-primary-header component-page-header">
+               <button  class="sidenav-toggle mat-button" mat-button="">
+                  <span class="mat-button-wrapper">
+                     <mat-icon  class="mat-icon material-icons" role="img" aria-hidden="true">menu</mat-icon>
+                  </span>
+                  <div class="mat-button-ripple mat-ripple" matripple=""></div>
+                  <div class="mat-button-focus-overlay"></div>
+               </button>
+            <h1 focusonnavigation="" tabindex="-1">Toolbar </h1>
+            </div>
+         
+            <div class="docs-component-sidenav-inner-content">
+               <div class="docs-component-sidenav-body-content">         
+                  <div class="docs-component-viewer-nav">
+                     <div class="docs-component-viewer-nav-content">
+                        <nav class="ng-tns-c12-1 ng-star-inserted">
+                        <button class="ng-tns-c12-1" aria-label="Form Controls, section toggle" aria-controls="panel-forms" aria-expanded="false">
+                           Form Controls
+                           <!----><mat-icon class="mat-icon ng-tns-c12-1 material-icons ng-star-inserted" role="img" aria-hidden="true">keyboard_arrow_down</mat-icon>
+                           <!---->
+                        </button>
+                        <ul class="ng-tns-c12-1 ng-trigger ng-trigger-bodyExpansion" id="panel-forms" style="height: 0px; visibility: hidden;">
+                           <!----><li class="ng-tns-c12-1 ng-star-inserted" >
+                           <a class="ng-tns-c12-1" routerlinkactive="docs-component-viewer-sidenav-item-selected" href="/components/autocomplete">
+                              Autocomplete
+                           </a>
+                           </li><li class="ng-tns-c12-1 ng-star-inserted" >
+                           <a class="ng-tns-c12-1" routerlinkactive="docs-component-viewer-sidenav-item-selected" href="/components/checkbox">
+                              Checkbox
+                           </a>
+                           </li>
+                        </ul>
+                        <!----><hr class="ng-tns-c12-1 ng-star-inserted">
+                        </nav>                           
+                     </div>
+                  </div>         
+                  <router-outlet></router-outlet>               
+               </div>      
+            </div> 
+         </div>
+   </mat-sidenav-content>
+</mat-sidenav-container>
+ 
