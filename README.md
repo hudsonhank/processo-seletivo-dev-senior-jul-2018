@@ -15,9 +15,7 @@ evolução do sistema começem a aparece.
 
 ### Como é dividido projeto?
 
-
-
-A aplicação é dividida em 3 partes principais:
+A aplicação é dividida em 4 partes principais:
 
  * **Core.Abstractions**: Projeto com as classes base do projeto. A ideia é utilizar esse projeto como um Seed para qualquer novo projeto.
 
@@ -55,21 +53,24 @@ A aplicação é dividida em 3 partes principais:
 
 `docker-compose build && docker-compose up`
 
-5 - Aguarde as imagens terminarem se "levantar" e assim que o banco 'mssql-server' estiver apto a receber comandos, abra 
-uma ferramenta de gestao de banco de dados e execute o script de criação que se encontra na pasta "data/scrip_incial.sql"
+5 - Aguarde as imagens terminarem se "levantar" e assim que o banco 'mssql-server' estiver apto a receber comandos, abra uma ferramenta de gestao de banco de dados e execute o script de criação que se encontra na pasta "Api/data/criar_database.sql" e logo depois  "Api/data/scrip_incial.sql"
 (Fiz isso porque acho muito ruim o model create do asp.net, acho muito mais simples criar por mim);
 
-6 - Se tudo estive ok a aplicação pode ser vista no endereço: `http://localhost:50000/swagger
+6 - Se tudo estive ok a aplicação pode ser vista no endereço: http://localhost:50000/swagger
 
 7 - acesse no diretorio pasta "App" por conta das configurações do projeto angular.
 
 8 - abra um prompt de comando e execute os comandos docker:
 
-***npm i --save*** 
+*npm i --save*
 
-***ng s -o***
+*ng s -o*
 
-9 - Se tudo estive ok a App pode ser vista no endereço: `http://localhost:4200
+9 - Se tudo estive ok a App pode ser vista no endereço: http://localhost:4200
+
+
+
+
 
 
 
