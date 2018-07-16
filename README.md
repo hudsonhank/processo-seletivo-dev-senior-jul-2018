@@ -20,12 +20,19 @@ evolução do sistema começem a aparece.
 A aplicação é dividida em 3 partes principais:
 
  * **Core.Abstractions**: Projeto com as classes base do projeto. A ideia é utilizar esse projeto como um Seed para qualquer novo projeto.
+
  * **SGL.API**:  Porta de entrada das informações. Sera responsavel pelo gerenciamento das requisições dos recursos do sistema.
+
  * **SGL.Core:** Onde aplicamos os pedidos que negocio que o dominio exige,
    esse projeto é resonsavel por fazer as prés validações antes de executar um comando, e tambem
    garantindo a emissão de eventos de resposta para as demais partes do sistema.
    Podemos dizer que nesse projeto se encontra os executores de todas os requisitos propostos para execuação do sistema.
+
  * **SGL.UnitTest**: Neste primeiro momento será escrito somente testes dos serviços do dominio. Afim de garantir que as regras solicitadas, estejam de acordo.
+
+ * **App Angular 6**: App feita em Angular 6 para acessar os recursos do sistema;
+
+   
 
 
 ### Que recursos de terceiros foram utilizados
@@ -52,7 +59,23 @@ A aplicação é dividida em 3 partes principais:
 uma ferramenta de gestao de banco de dados e execute o script de criação que se encontra na pasta "data/scrip_incial.sql"
 (Fiz isso porque acho muito ruim o model create do asp.net, acho muito mais simples criar por mim);
 
-6 - Se tudo estive ok a aplicação pode ser vista no endereço: `http://localhost:50000/swagger`
+6 - Se tudo estive ok a aplicação pode ser vista no endereço: `http://localhost:50000/swagger
+
+7 - acesse no diretorio pasta "App" por conta das configurações do projeto angular.
+
+8 - abra um prompt de comando e execute os comandos docker:
+
+***npm i --save*** 
+
+***ng s -o***
+
+9 - Se tudo estive ok a App pode ser vista no endereço: `http://localhost:4200
+
+
+
+
+
+
 
 
 

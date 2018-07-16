@@ -186,7 +186,7 @@ export class DataBase<TModel> {
   onDeletar(id: number): Observable<any> {
     return (
       this._http
-        .delete(this.url + `${id}`, this.onCreateRequestOptions())
+        .delete(this.url + `/${id}`, this.onCreateRequestOptions())
         .catch(this.onHandleError)
     );
   }
